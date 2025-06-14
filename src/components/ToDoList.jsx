@@ -18,7 +18,7 @@ function ToDoList() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/tasks");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`);
         setTasks(response.data);
       } catch (err) {
         if (err.response.status !== 401) {
@@ -47,7 +47,7 @@ function ToDoList() {
 
     if (user) {
       try {
-        const response = await axios.post("http://localhost:4000/api/tasks", {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/tasks`, {
           text: newTodoText,
         });
 
@@ -67,7 +67,7 @@ function ToDoList() {
   const handleDeleteTask = async (id) => {
     if (user) {
       try {
-        await axios.delete(`http://localhost:4000/api/tasks/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`);
         setTasks(tasks.filter((task) => task._id !== id));
       } catch (err) {
         console.error("Error deleting task: ", err);
@@ -83,7 +83,7 @@ function ToDoList() {
         const taskToToggle = tasks.find((task) => task._id === id);
   
         const response = await axios.put(
-          `http://localhost:4000/api/tasks/${id}`,
+          `${import.meta.env.VITE_API_URL}/api/tasks/${id}`,
           { isCompleted: !taskToToggle.isCompleted }
         );
   

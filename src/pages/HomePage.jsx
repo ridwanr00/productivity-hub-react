@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import ToDoList from "../components/ToDoList";
+import AuthContext from "../context/AuthContext";
 
 function HomePage() {
   const date = new Date();
@@ -6,9 +8,32 @@ function HomePage() {
   const month = date.getMonth();
   const dateOfMonth = date.getDate();
 
-  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const formattedDate = `${dayNames[day]}, ${monthNames[month]} ${dateOfMonth}`;
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const formattedDate = `${dayNames[day]}, ${monthNames[month]} ${dateOfMonth}`;
+
+  const { user } = useContext(AuthContext);
 
   return (
     <>
@@ -20,7 +45,14 @@ function HomePage() {
           Welcome back! Here are your tasks for today, {formattedDate}
         </p>
       </div>
-      <ToDoList></ToDoList>
+      {user ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <ToDoList />
+          <ExpenseList />
+        </div>
+      ) : (
+        <ToDoList />
+      )}
     </>
   );
 }

@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       navigate("/");
     } catch (err) {
       console.error("Login error: ", err.response.data.message);
-      alert("Login failed: ", err.response.data.message);
+      alert(`Login failed: ${err.response.data.message}`); 
     }
   };
 

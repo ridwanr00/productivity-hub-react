@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import ToDoList from "../components/ToDoList";
 import AuthContext from "../context/AuthContext";
+import ExpenseList from "../components/ExpenseList";
 
 function HomePage() {
   const date = new Date();
